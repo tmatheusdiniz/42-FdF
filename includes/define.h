@@ -27,7 +27,7 @@ typedef struct s_fdf
 {
 	void	*mlx;
 	void	*win;
-	int		shift_;
+	int		shift_x;
 	int		shift_y;
 	int		projection;
 	double	scale;
@@ -36,10 +36,12 @@ typedef struct s_fdf
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
-	int	z;
-	int	color;
+	float	x;
+	float	y;
+	float	z;
+	float	dx;
+	float	dy;
+	int		color;
 } t_point;
 
 typedef struct s_map
@@ -60,7 +62,7 @@ typedef struct s_img
 } t_img;
 typedef struct s_mouse
 {
-	int	is_pressed;
+	int		is_pressed;
 	int		last_x;
 	int		last_y;
 } t_mouse;

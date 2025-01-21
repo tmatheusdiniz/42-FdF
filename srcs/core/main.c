@@ -49,5 +49,5 @@ int	main(int c, char **str)
 		ft_printf("Usage: ./bin/fdf /maps/choose a map");
 	if (!(initialize_mlx(&meta)))
 		handler_errors(&meta, ERR_MLX);
-	
+	mlx_loop(meta.fdf.mlx);
 }
