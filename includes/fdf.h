@@ -22,7 +22,7 @@
 
 // Core
 int			main(int v, char **str);
-static int	initialize_mlx(t_meta *meta);
+//static int	initialize_mlx(t_meta *meta);
 
 // Utils
 void	handler_errors(t_meta *meta, char *message);
@@ -33,5 +33,12 @@ void setup_hooks(t_meta *meta);
 int handle_mouse_press(int button, int x, int y, t_meta *meta);
 int handle_mouse_release(int button, int x, int y, t_meta *meta);
 int handle_mouse_move(int x, int y, t_meta *meta);
+
+// Render
+void	draw_line(t_meta *meta, float old_x, float old_y, int color);
+void	draw_wireframe(t_meta *meta);
+void	put_pixel(t_meta *meta, float x, float y, int color);
+
+int handle_close(void *param);
 
 #endif

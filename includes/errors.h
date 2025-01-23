@@ -16,6 +16,7 @@
 // Error messages
 # define ERR_ARGS		"Wrong number of arguments. There was expecting exactly 2!"
 # define ERR_MLX		"MLX initialization failed! 🚫"
+# define ERR_MLX_H		"MLX hooks failed! 🚫"
 # define ERR_OPEN		"📂 Can't open the file. Does it even exist?"
 # define ERR_READ		"📖 Trouble reading the file. What's going on over there?"
 # define ERR_SPLIT		"✂️ Couldn't split the line. What kind of mess is this data?"

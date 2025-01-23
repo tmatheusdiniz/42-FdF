@@ -27,14 +27,14 @@ static int	initialize_mlx(t_meta *meta)
 		return (0);
 	}
 	meta->img.img_ptr = mlx_new_image(meta->fdf.mlx,
-			WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100);
+			WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!meta->img.img_ptr)
 	{
 		mlx_destroy_window(meta->fdf.mlx, meta->fdf.win);
 		free (meta->fdf.mlx);
 		return (0);
 	}
-	meta->img.img_ptr = mlx_get_data_addr(meta->img.img_ptr,
+	meta->img.addr = mlx_get_data_addr(meta->img.img_ptr,
 			&meta->img.bits_per_pixel,
 			&meta->img.line_length, &meta->img.endian);
 	return (1);
@@ -44,10 +44,17 @@ int	main(int c, char **str)
 {
 	t_meta	meta;
 
+	(void)str;
+	(void)c;
+
 	ft_memset(&meta, 0, sizeof(t_meta));
+	/*
 	if (c != 2)
 		ft_printf("Usage: ./bin/fdf /maps/choose a map");
+	*/
 	if (!(initialize_mlx(&meta)))
 		handler_errors(&meta, ERR_MLX);
+	draw_wireframe(&meta);
+	mlx_put_image_to_window(meta.fdf.mlx, meta.fdf.win, meta.img.img_ptr, 0, 0);
 	mlx_loop(meta.fdf.mlx);
 }

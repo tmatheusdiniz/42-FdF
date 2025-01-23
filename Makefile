@@ -36,8 +36,13 @@ BIN_DIR	= bin
 LIBFT_DIR	= ./libs/Libft/
 MINILIBX_DIR = ./libs/minilibx-linux/
 
-# Source and object files using wildcards
-SRCS	= $(wildcard $(SRC_DIR)/*/*.c)
+
+SRCS = ./srcs/core/main.c \
+			./srcs/render/draw.c \
+			./srcs/utils/error.c
+
+//SRCS	= $(wildcard $(SRC_DIR)/*/*.c)
+
 OBJS	= $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SRCS:.c=.o))
 
 # Libft
@@ -87,7 +92,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(MLX): $(MINILIBX_DIR)
 	@make -C $^ > /dev/null 2>&1
-
 
 $(LIBFT):
 	@make --silent -C $(LIBFT_DIR)

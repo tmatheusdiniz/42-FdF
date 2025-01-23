@@ -27,7 +27,8 @@ static void	clean_all(t_meta *meta)
 
 void	handler_errors(t_meta *meta, char *message)
 {
-	ft_printf("%s\n", message);
+	if (message)
+		ft_printf("%s\n", message);
 	clean_all(meta);
 	exit(0);
 }

@@ -21,6 +21,8 @@
 # define PURPLE 0x800080
 # define YELLOW 0xFFFF00
 # define WHITE 0xFFFFFF
+# define OFFSET_X 100
+# define OFFSET_Y 50
 
 // Structs
 typedef struct s_fdf

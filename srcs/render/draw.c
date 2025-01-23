@@ -12,9 +12,21 @@
 
 #include "../../includes/define.h"
 
-void	draw_line(t_meta *meta, float old_x, float old_y)
+void	put_pixel(t_meta *meta, float x, float y, int color)
 {
-	int		pixel;
+	int	pixel;
+
+	x += OFFSET_X;
+	y += OFFSET_Y;
+	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT) 
+		return;
+	pixel = ((int)y * meta->img.line_length)
+		+ ((int)x * (meta->img.bits_per_pixel / 8));
+	*(unsigned int *)(meta->img.addr + pixel) = color;
+}
+
+void	draw_line(t_meta *meta, float old_x, float old_y, int color)
+{
 	float	p;
 	float	x;
 	float	y;
@@ -26,10 +38,8 @@ void	draw_line(t_meta *meta, float old_x, float old_y)
 	p = 2 * meta->point.dy - meta->point.dx;
 	while (old_x <= x)
 	{
-		pixel = ((int)old_y * meta->img.line_length)
-			+ ((int)old_x * (meta->img.bits_per_pixel / 8));
-		*(unsigned int *)(meta->img.img_ptr + pixel) = 0x000000;
-		old_x ++;
+		put_pixel(meta, old_x, old_y, color);
+		old_x++;
 		if (p < 0)
 			p = p + 2 * meta->point.dy;
 		else
@@ -40,4 +50,25 @@ void	draw_line(t_meta *meta, float old_x, float old_y)
 	}
 }
 
+void    draw_wireframe(t_meta *meta)
+{
+    int x, y;
 
+    for (x = 0; x < 800; x += 50)
+    {
+        for (y = 0; y < 600; y++)
+        {
+            put_pixel(meta, x, y, 0x00FF00);  // Vertical green lines
+        }
+    }
+    for (y = 0; y < 600; y += 50)
+    {
+        for (x = 0; x < 800; x++)
+        {
+            put_pixel(meta, x, y, 0x0000FF);  // Horizontal blue lines
+        }
+    }
+    put_pixel(meta, 400, 100, 0xFF0000);  // Top point (red)
+    put_pixel(meta, 350, 200, 0xFF0000);  // Bottom left point (red)
+    put_pixel(meta, 450, 200, 0xFF0000);  // Bottom right point (red)
+}
