@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
-#include "../../includes/errors.h"
 
 static int	initialize_mlx(t_meta *meta)
 {
@@ -31,6 +30,7 @@ static int	initialize_mlx(t_meta *meta)
 	if (!meta->img.img_ptr)
 	{
 		mlx_destroy_window(meta->fdf.mlx, meta->fdf.win);
+		mlx_destroy_display(meta->fdf.mlx);
 		free (meta->fdf.mlx);
 		return (0);
 	}
@@ -44,14 +44,8 @@ int	main(int c, char **str)
 {
 	t_meta	meta;
 
-	(void)str;
-	(void)c;
-
+	check_map(c, str);
 	ft_memset(&meta, 0, sizeof(t_meta));
-	/*
-	if (c != 2)
-		ft_printf("Usage: ./bin/fdf /maps/choose a map");
-	*/
 	if (!(initialize_mlx(&meta)))
 		handler_errors(&meta, ERR_MLX);
 	draw_wireframe(&meta);

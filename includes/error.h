@@ -14,7 +14,9 @@
 # define ERRORS_H
 
 // Error messages
-# define ERR_ARGS		"Wrong number of arguments. There was expecting exactly 2!"
+# define ERR_ARGS		"Wrong number of arguments. There was expecting exactly 2! e.g:  ./bin/fdf */name_file.fdf"
+# define ERR_MAP		"🗺️Invalid map format"
+# define ERR_MLC		"Error to malloc"
 # define ERR_MLX		"MLX initialization failed! 🚫"
 # define ERR_MLX_H		"MLX hooks failed! 🚫"
 # define ERR_OPEN		"📂 Can't open the file. Does it even exist?"
@@ -23,6 +25,5 @@
 # define ERR_LINE		"📏 Error! Each line must have the same number of elements. Let's fix this!"
 # define ERR_EMPTY		"📂 File is empty or poorly formatted. What are you feeding me?"
 # define ERR_MEM		"💾 Memory allocation failed. Out of memory? Free some space!"
-# define ERR_MAP		"🗺️ Map error. Something's not quite right with the coordinates!"
 
 #endif

@@ -36,12 +36,7 @@ BIN_DIR	= bin
 LIBFT_DIR	= ./libs/Libft/
 MINILIBX_DIR = ./libs/minilibx-linux/
 
-
-SRCS = ./srcs/core/main.c \
-			./srcs/render/draw.c \
-			./srcs/utils/error.c
-
-//SRCS	= $(wildcard $(SRC_DIR)/*/*.c)
+SRCS	= $(wildcard $(SRC_DIR)/*/*.c)
 
 OBJS	= $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SRCS:.c=.o))
 
