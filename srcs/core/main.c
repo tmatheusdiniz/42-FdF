@@ -48,7 +48,8 @@ int	main(int c, char **str)
 	ft_memset(&meta, 0, sizeof(t_meta));
 	if (!(initialize_mlx(&meta)))
 		handler_errors(&meta, ERR_MLX);
-	draw_wireframe(&meta);
+	read_map(&meta, str[1]);
+	draw_map(&meta);
 	mlx_put_image_to_window(meta.fdf.mlx, meta.fdf.win, meta.img.img_ptr, 0, 0);
 	mlx_loop(meta.fdf.mlx);
 }

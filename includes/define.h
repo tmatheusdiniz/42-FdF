@@ -25,6 +25,9 @@
 # define SCALE 20
 # define TRUE 1
 # define FALSE 0
+# define ISO_ANGLE 0.523599
+
+// Colors
 # define PURPLE 0x800080
 # define YELLOW 0xFFFF00
 # define WHITE 0xFFFFFF
@@ -59,6 +62,8 @@ typedef struct s_map
 	int		width;
 	int		height;
 	int		spacing;
+	int		screen_x;
+	int		screen_y;
 	float	offset_x;
 	float	offset_y;
 	int		**coords;
@@ -89,5 +94,4 @@ typedef struct s_meta
 	t_mouse	mouse;
 } t_meta;
 
-void draw_triangles(t_meta *meta);
 #endif
