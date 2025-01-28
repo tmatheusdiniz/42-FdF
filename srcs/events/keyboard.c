@@ -13,10 +13,15 @@
 #include "../../includes/fdf.h"
 #include "../../includes/keys.h"
 
+static void	move_map(t_meta *meta, int dx, int dy);
+static void	zoom_map(t_meta *meta, float factor);
+static void	reset_view(t_meta *meta);
+static void	render_map(t_meta *meta);
+
 int handle_key_press(int keycode, t_meta *meta)
 {
 	if (keycode == KEY_ESC)
-		handler_errors(meta, "exit esc");
+		clean_all(meta);
 	else if (keycode == KEY_W)
 		move_map(meta, 0, -10);
 	else if (keycode == KEY_S)
@@ -35,24 +40,33 @@ int handle_key_press(int keycode, t_meta *meta)
 	return (0);
 }
 
-void setup_hooks(t_meta *meta)
+static void	move_map(t_meta *meta, int dx, int dy)
 {
-	mlx_hook(meta->fdf.win, 2, 1L<<0, handle_key_press, meta);
-	mlx_hook(meta->fdf.win, 17, 0, handle_close, meta);
-	mlx_mouse_hook(meta->fdf.win, handle_mouse_press, meta);
-	mlx_hook(meta->fdf.win, 5, 1L<<3, handle_mouse_release, meta);
-	mlx_hook(meta->fdf.win, 6, 1L<<6, handle_mouse_move, meta);
+	meta->view.offset_x += dx;
+	meta->view.offset_x += dy;
 }
 
-int handle_close(void *param)
+static void	zoom_map(t_meta *meta, float factor)
 {
-    t_meta *meta = (t_meta *)param;
+	meta->view.zoom *= factor;
+	if (meta->view.zoom < 0.1)
+		meta->view.zoom = 0.1;
+	if (meta->view.zoom > 10)
+		meta->view.zoom = 10;
+}
 
-    // Clean up MLX resources
-    mlx_destroy_image(meta->fdf.mlx, meta->img.img_ptr);
-    mlx_destroy_window(meta->fdf.mlx, meta->fdf.win);
+static void	reset_view(t_meta *meta)
+{
+	meta->view.zoom = 1.0;
+	meta->view.offset_x = meta->view.init_offset_x;
+	meta->view.offset_y = meta->view.init_offset_y;
+	meta->map.spacing = meta->view.init_spacing;
+}
 
-    // Exit the program
-    exit(0);
-    return (0);
+static void	render_map(t_meta *meta)
+{
+	ft_memset(meta->img.addr, 0, WINDOW_WIDTH * WINDOW_HEIGHT *
+		(meta->img.bits_per_pixel / 8));
+	draw_map(meta);
+	mlx_put_image_to_window(meta->fdf.mlx, meta->fdf.win, meta->img.img_ptr, 0, 0);
 }

@@ -49,6 +49,7 @@ void	setup_hooks(t_meta *meta);
 void	aux_draw_map(t_meta *meta, int *i, int *j);
 void	handler_errors(t_meta *meta, char *message);
 void	check_map(int v, char **matrix);
+int		clean_all(t_meta *meta);
 int		get_color(int z);
 
 #endif

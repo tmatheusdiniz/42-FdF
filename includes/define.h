@@ -38,12 +38,7 @@ typedef struct s_fdf
 {
 	void	*mlx;
 	void	*win;
-	int		shift_x;
-	int		shift_y;
-	int		projection;
-	double	scale;
-	double	angle;
-} t_fdf;
+}	t_fdf;
 
 typedef struct s_point
 {
@@ -56,7 +51,7 @@ typedef struct s_point
 	int	dx;
 	int	dy;
 	int	color;
-} t_point;
+}	t_point;
 
 typedef struct s_map
 {
@@ -65,10 +60,22 @@ typedef struct s_map
 	int		spacing;
 	int		screen_x;
 	int		screen_y;
+	int		current_x;
+	int		current_y;
+	int		**coords;
 	float	offset_x;
 	float	offset_y;
-	int		**coords;
-} t_map;
+}	t_map;
+
+typedef struct s_view
+{
+	float	zoom;
+	float	offset_x;
+	float	offset_y;
+	float	init_offset_x;
+	float	init_offset_y;
+	float	init_spacing;
+}	t_view;
 
 typedef struct s_img
 {
@@ -77,13 +84,13 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-} t_img;
+}	t_img;
 typedef struct s_mouse
 {
 	int		is_pressed;
 	int		last_x;
 	int		last_y;
-} t_mouse;
+}	t_mouse;
 
 typedef struct s_meta
 {
@@ -92,6 +99,7 @@ typedef struct s_meta
 	t_map	map;
 	t_img	img;
 	t_mouse	mouse;
-} t_meta;
+	t_view	view;
+}	t_meta;
 
 #endif

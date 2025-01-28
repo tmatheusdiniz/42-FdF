@@ -12,7 +12,9 @@
 
 #include "../../includes/fdf.h"
 
-static void	clean_all(t_meta *meta)
+static void	free_mlx_data(t_meta *meta);
+
+static void	free_map_data(t_meta *meta)
 {
 	int	i;
 
@@ -26,7 +28,12 @@ static void	clean_all(t_meta *meta)
 			i++;
 		}
 		free(meta->map.coords);
-    }
+	}
+
+}
+
+static void	free_mlx_data(t_meta *meta)
+{
 	if (meta->img.img_ptr)
 		mlx_destroy_image(meta->fdf.mlx, meta->img.img_ptr);
 	if (meta->fdf.win)
@@ -38,10 +45,22 @@ static void	clean_all(t_meta *meta)
 	}
 }
 
+int	clean_all(t_meta *meta)
+{
+	free_map_data(meta);
+	free_mlx_data(meta);
+	exit(0);
+	return (0);
+}
+
 void	handler_errors(t_meta *meta, char *message)
 {
 	if (message)
 		ft_printf("%s\n", message);
-	clean_all(meta);
-	exit(0);
+	if (meta)
+	{
+		free_map_data(meta);
+		free_mlx_data(meta);
+	}
+	exit (1);
 }

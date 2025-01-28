@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projection.c                                       :+:      :+:    :+:   */
+/*   handle_cases.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreinald <mreinald@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 22:47:14 by mreinald          #+#    #+#             */
-/*   Updated: 2025/01/26 22:47:50 by mreinald         ###   ########.fr       */
+/*   Created: 2025/01/28 16:51:44 by mreinald          #+#    #+#             */
+/*   Updated: 2025/01/28 16:52:11 by mreinald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 
-void	project_isometric(t_meta *meta, int *screen_x, int *screen_y)
+void setup_hooks(t_meta *meta)
 {
-	float	x;
-	float	y;
-	float	z;
-
-	x = meta->point.x * meta->map.spacing * meta->view.zoom;
-	y = meta->point.y * meta->map.spacing * meta->view.zoom;
-	z = meta->point.z * (meta->map.spacing * Z_SCALE) * meta->view.zoom;
-	*screen_x = (x - y) * cos(ISO_ANGLE);
-	*screen_y = (x + y)
-		* sin(ISO_ANGLE) - z;
-	*screen_x += meta->view.offset_x;
-	*screen_y += meta->view.offset_y;
+	mlx_hook(meta->fdf.win, 2, 1L<<0, handle_key_press, meta);
+	//mlx_mouse_hook(meta->fdf.win, handle_mouse_press, meta);
+	mlx_hook(meta->fdf.win, 17, 0, clean_all, meta);
+	//mlx_hook(meta->fdf.win, 5, 1L<<3, handle_mouse_release, meta);
+	//mlx_hook(meta->fdf.win, 6, 1L<6, handle_mouse_move, meta);
 }
+

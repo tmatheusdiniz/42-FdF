@@ -12,60 +12,75 @@
 
 #include "../../includes/fdf.h"
 
+static void	aux_get_coords(t_meta *meta, int *i, int *j, int fd);
+
 void	read_map(t_meta *meta, char *path)
 {
 	int		fd;
 	int		i;
 	char	*line;
 
-	fd = open(path, O_RDONLY);
 	i = 0;
+	meta->map.width = map_columns(meta, path);
+	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		handler_errors(meta, ERR_OPEN);
 	line = get_next_line(fd);
 	if (!line)
 		handler_errors(meta, ERR_READ);
-	meta->map.width = map_columns(meta, line);
-	i = 1;
-	free (line);
-	while ((line = get_next_line(fd)) != NULL)
+	while (line != NULL)
 	{
 		free (line);
 		i ++;
+		line = get_next_line(fd);
 	}
+	close (fd);
 	meta->map.height = i;
 	init_map(meta);
 	get_coordinates(meta, path);
-	close (fd);
 }
 
 void	get_coordinates(t_meta *meta, char *path)
 {
-	int		i;
-	int		j;
-	int		fd;
-	char	*line;
-	char	**split;
+	int	i;
+	int	j;
+	int	fd;
 
 	i = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		handler_errors(meta, ERR_OPEN);
-	while ((line = get_next_line(fd)) != NULL)
+	aux_get_coords(meta, &i, &j, fd);
+	close (fd);
+}
+
+static void	aux_get_coords(t_meta *meta, int *i, int *j, int fd)
+{
+	char	*line;
+	char	**split;
+
+	line = get_next_line(fd);
+	if (!line)
+		handler_errors(meta, ERR_READ);
+	while (line != NULL)
 	{
 		split = ft_split(line, ' ');
-		j = 0;
-		while (split[j])
+		if (!split)
 		{
-			meta->map.coords[i][j] = ft_atoi(split[j]);
-			free (split[j]);
-			j ++;
+			free (line);
+			handler_errors(meta, ERR_MLC);
+		}
+		*j = 0;
+		while (split[*j])
+		{
+			meta->map.coords[*i][*j] = ft_atoi(split[*j]);
+			free (split[(*j)++]);
 		}
 		free (split);
 		free (line);
-		i ++;
+		(*i)++;
+		line = get_next_line(fd);
 	}
-	close (fd);
 }
 
 void	init_map(t_meta *meta)
@@ -85,14 +100,22 @@ void	init_map(t_meta *meta)
 	}
 }
 
-int	map_columns(t_meta *meta, char *line)
+int	map_columns(t_meta *meta, char *path)
 {
 	int		count;
 	int		i;
+	int		fd;
+	char	*line;
 	char	**split;
 
 	i = 0;
 	count = 0;
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		handler_errors(meta, ERR_OPEN);
+	line = get_next_line(fd);
+	if (!line)
+		handler_errors(meta, ERR_READ);
 	split = ft_split(line, ' ');
 	if (!split)
 		handler_errors(meta, ERR_MLC);
@@ -101,6 +124,6 @@ int	map_columns(t_meta *meta, char *line)
 	while (split[i])
 		free (split[i++]);
 	free (split);
+	close (fd);
 	return (count);
 }
-

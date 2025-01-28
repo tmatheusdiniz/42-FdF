@@ -17,12 +17,12 @@ void	calculate_offset(t_meta *meta)
 	int	wireframe_x;
 	int	wireframe_y;
 
-	meta->map.spacing = min((WINDOW_WIDTH / 2) / meta->map.width,
-			(WINDOW_HEIGHT / 2) / meta->map.height);
+	meta->map.spacing = min((WINDOW_WIDTH / 3) / meta->map.width,
+			(WINDOW_HEIGHT / 3) / meta->map.height);
 	if (meta->map.spacing < 1)
 		meta->map.spacing = 1;
-	wireframe_x = (meta->map.width - 1) * meta->map.spacing;
-	wireframe_y = (meta->map.height - 1) * meta->map.spacing;
+	wireframe_x = (meta->map.width - 1) * meta->map.spacing / 3;
+	wireframe_y = (meta->map.height - 1) * meta->map.spacing * 2;
 	meta->map.offset_x = (WINDOW_WIDTH - wireframe_x) / 2.0;
 	meta->map.offset_y = (WINDOW_HEIGHT - wireframe_y) / 2.0;
 }
@@ -40,41 +40,29 @@ void	put_pixel(t_meta *meta, float x, float y)
 
 void	draw_line_loop(t_meta *meta, int sx, int sy, int err)
 {
-	int	dx;
-	int	dy;
 	int	e2;
-	int max_iterations = WINDOW_WIDTH + WINDOW_HEIGHT; // Número máximo de iterações esperadas
-	int iteration_count = 0;
-	dx = meta->point.dx;
-	dy = meta->point.dy;
-	while (1)
+
+	while ((int)meta->point.x0 < WINDOW_WIDTH
+		&& (int)meta->point.y0 < WINDOW_HEIGHT
+		&& (int)meta->point.x0 >= 0 && (int)meta->point.y0 >= 0)
 	{
-		if (meta->point.x0 >= 0 && meta->point.x < WINDOW_WIDTH &&
-        	meta->point.y0 >= 0 && meta->point.y < WINDOW_HEIGHT)
-        {
-            put_pixel(meta, meta->point.x0, meta->point.y0);
-        }
-		//put_pixel(meta, meta->point.x0, meta->point.y0);
-		if (meta->point.x0 == meta->point.x && meta->point.y0 == meta->point.y)
+		put_pixel(meta, meta->point.x0, meta->point.y0);
+		if ((sx > 0 && meta->point.x0 >= meta->point.x)
+			|| (sx < 0 && meta->point.x0 <= meta->point.x)
+			|| (sy > 0 && meta->point.y0 >= meta->point.y)
+			|| (sy < 0 && meta->point.y0 <= meta->point.y))
 			break ;
 		e2 = 2 * err;
-		if (e2 > -dy)
+		if (e2 > -(meta->point.dy))
 		{
-			err -= dy;
+			err -= meta->point.dy;
 			meta->point.x0 += sx;
 		}
 		if (e2 < meta->point.dx)
 		{
-			err += dx;
+			err += meta->point.dx;
 			meta->point.y0 += sy;
 		}
-		iteration_count++;
-    	if (iteration_count > max_iterations)
-    	{
-			ft_printf("%i\n", iteration_count);
-        	ft_printf("Erro: Loop infinito detectado!\n");
-        	break;
-    	}
 	}
 }
 
