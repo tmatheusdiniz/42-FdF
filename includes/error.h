@@ -14,7 +14,7 @@
 # define ERRORS_H
 
 // Error messages
-# define ERR_ARGS		"Wrong number of arguments. There was expecting exactly 2! e.g:  ./bin/fdf */name_file.fdf"
+# define ERR_ARGS		"Wrong number of arguments. There was expecting exactly 2! e.g: ./bin/fdf */name_file.fdf"
 # define ERR_MAP		"🗺️Invalid map format"
 # define ERR_MLC		"Error to malloc"
 # define ERR_MLX		"MLX initialization failed! 🚫"

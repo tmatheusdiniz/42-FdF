@@ -14,9 +14,16 @@
 
 void	project_isometric(t_meta *meta, int *screen_x, int *screen_y)
 {
-	*screen_x = (meta->point.x - meta->point.y) * cos(ISO_ANGLE);
-	*screen_y = (meta->point.x + meta->point.y)
-		* sin(ISO_ANGLE) - meta->point.z;
+	float	x;
+	float	y;
+	float	z;
+
+	x = meta->point.x * meta->map.spacing;
+	y = meta->point.y * meta->map.spacing;
+	z = meta->point.z * (meta->map.spacing * Z_SCALE);
+	*screen_x = (x - y) * cos(ISO_ANGLE);
+	*screen_y = (x + y)
+		* sin(ISO_ANGLE) - z;
 	*screen_x += meta->map.offset_x;
 	*screen_y += meta->map.offset_y;
 }

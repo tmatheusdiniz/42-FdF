@@ -17,8 +17,10 @@ void	calculate_offset(t_meta *meta)
 	int	wireframe_x;
 	int	wireframe_y;
 
-	meta->map.spacing = min(WINDOW_WIDTH / meta->map.width,
-			WINDOW_HEIGHT / meta->map.height);
+	meta->map.spacing = min((WINDOW_WIDTH / 2) / meta->map.width,
+			(WINDOW_HEIGHT / 2) / meta->map.height);
+	if (meta->map.spacing < 1)
+		meta->map.spacing = 1;
 	wireframe_x = (meta->map.width - 1) * meta->map.spacing;
 	wireframe_y = (meta->map.height - 1) * meta->map.spacing;
 	meta->map.offset_x = (WINDOW_WIDTH - wireframe_x) / 2.0;
@@ -41,12 +43,18 @@ void	draw_line_loop(t_meta *meta, int sx, int sy, int err)
 	int	dx;
 	int	dy;
 	int	e2;
-
+	int max_iterations = WINDOW_WIDTH + WINDOW_HEIGHT; // Número máximo de iterações esperadas
+	int iteration_count = 0;
 	dx = meta->point.dx;
 	dy = meta->point.dy;
 	while (1)
 	{
-		put_pixel(meta, meta->point.x0, meta->point.y0);
+		if (meta->point.x0 >= 0 && meta->point.x < WINDOW_WIDTH &&
+        	meta->point.y0 >= 0 && meta->point.y < WINDOW_HEIGHT)
+        {
+            put_pixel(meta, meta->point.x0, meta->point.y0);
+        }
+		//put_pixel(meta, meta->point.x0, meta->point.y0);
 		if (meta->point.x0 == meta->point.x && meta->point.y0 == meta->point.y)
 			break ;
 		e2 = 2 * err;
@@ -60,6 +68,13 @@ void	draw_line_loop(t_meta *meta, int sx, int sy, int err)
 			err += dx;
 			meta->point.y0 += sy;
 		}
+		iteration_count++;
+    	if (iteration_count > max_iterations)
+    	{
+			ft_printf("%i\n", iteration_count);
+        	ft_printf("Erro: Loop infinito detectado!\n");
+        	break;
+    	}
 	}
 }
 
@@ -89,6 +104,7 @@ void	draw_map(t_meta *meta)
 	int	j;
 
 	i = 0;
+	calculate_offset(meta);
 	while (i < meta->map.height)
 	{
 		j = 0;

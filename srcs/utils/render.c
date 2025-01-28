@@ -19,7 +19,7 @@ void	aux_draw_map(t_meta *meta, int *i, int *j)
 
 	if (*(j) < meta->map.width - 1)
 	{
-		meta->point.x ++;
+		meta->point.x = *j + 1;
 		meta->point.z = meta->map.coords[*i][*j + 1];
 		project_isometric(meta, &screen_next_x, &screen_next_y);
 		meta->point.x0 = meta->map.screen_x;
@@ -28,9 +28,24 @@ void	aux_draw_map(t_meta *meta, int *i, int *j)
 		meta->point.y = screen_next_y;
 		draw_line(meta);
 	}
-	if (*(i) < meta->map.height)
+	if (*j > 0)
+    {
+    	meta->point.x = *j - 1;
+    	meta->point.z = meta->map.coords[*i][*j - 1];
+        project_isometric(meta, &screen_next_x, &screen_next_y);
+
+        // Define as coordenadas do ponto atual e do próximo ponto
+        meta->point.x0 = meta->map.screen_x;
+        meta->point.y0 = meta->map.screen_y;
+        meta->point.x = screen_next_x;
+        meta->point.y = screen_next_y;
+
+        // Desenha a linha
+        draw_line(meta);
+    }
+	if (*(i) < meta->map.height - 1)
 	{
-		meta->point.y ++;
+		meta->point.y = *i + 1;
 		meta->point.z = meta->map.coords[*i + 1][*j];
 		project_isometric(meta, &screen_next_x, &screen_next_y);
 		meta->point.x0 = meta->map.screen_x;

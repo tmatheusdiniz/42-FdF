@@ -14,6 +14,19 @@
 
 static void	clean_all(t_meta *meta)
 {
+	int	i;
+
+	i = 0;
+	if (meta->map.coords)
+	{
+		i = 0;
+		while (i < meta->map.height)
+		{
+			free(meta->map.coords[i]);
+			i++;
+		}
+		free(meta->map.coords);
+    }
 	if (meta->img.img_ptr)
 		mlx_destroy_image(meta->fdf.mlx, meta->img.img_ptr);
 	if (meta->fdf.win)

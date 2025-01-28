@@ -33,8 +33,7 @@ void	calculate_offset(t_meta *meta);
 void	read_map(t_meta *meta, char *path);
 void	get_coordinates(t_meta *meta, char *path);
 void	init_map(t_meta *meta);
-int		map_columns(char *line);
-void	free_map(t_meta *meta);
+int		map_columns(t_meta *meta, char *line);
 
 // Projections
 void	project_isometric(t_meta *meta, int *screen_x, int *screen_y);

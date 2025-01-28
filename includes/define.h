@@ -26,6 +26,7 @@
 # define TRUE 1
 # define FALSE 0
 # define ISO_ANGLE 0.523599
+# define Z_SCALE 0.07
 
 // Colors
 # define PURPLE 0x800080
@@ -67,7 +68,6 @@ typedef struct s_map
 	float	offset_x;
 	float	offset_y;
 	int		**coords;
-	int		**colors;
 } t_map;
 
 typedef struct s_img
