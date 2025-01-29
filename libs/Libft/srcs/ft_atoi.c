@@ -12,10 +12,25 @@
 
 #include "../include/libft.h"
 
+static int	ft_count_bits(long long number)
+{
+	int	count;
+
+	if (number == 0)
+		return (1);
+	count = 0;
+	while (number > 0)
+	{
+		count++;
+		number >>= 1;
+	}
+	return (count);
+}
+
 int	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	sign;
+	int			i;
+	int			sign;
 	long int	res;
 
 	i = 0;
@@ -34,19 +49,4 @@ int	ft_atoi(const char *nptr)
 	if (ft_count_bits(res) > 32)
 		res &= 0xFFFFFFFF;
 	return (res * sign);
-}
-
-int	ft_count_bits(long long number)
-{
-	int	count;
-
-	if (number == 0)
-		return (1);
-	count = 0;
-	while (number > 0)
-	{
-		count++;
-		number >>= 1;
-	}
-	return (count);
 }

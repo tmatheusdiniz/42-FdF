@@ -60,10 +60,38 @@ static void	put_points_y(t_meta *meta, int *i, int *j)
 
 int	get_color(int z)
 {
+	int	color;
+
 	if (z == 0)
 		return (WHITE);
 	else if (z > 0)
-		return (PURPLE);
+	{
+		color = fmin(255, abs(z) * 20);
+		return ((color << 16) | (0 << 8) | color);
+	}
 	else
-		return (YELLOW);
+	{
+		color = fmin(255, abs(z) * 20);
+		return ((color << 16) | (color << 8) | 0);
+	}
+}
+
+void	draw_m_background(t_meta *meta)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	y = 0;
+	color = 0x929191;
+	while (y < 1080)
+	{
+		x = 0;
+		while (x < 300)
+		{
+			mlx_pixel_put(meta->fdf.mlx, meta->fdf.win, x, y, color);
+			x++;
+		}
+		y++;
+	}
 }

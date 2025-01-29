@@ -40,6 +40,13 @@ typedef struct s_fdf
 	void	*win;
 }	t_fdf;
 
+typedef struct s_rotations
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_rotations;
+
 typedef struct s_point
 {
 	int	x;
@@ -72,9 +79,13 @@ typedef struct s_view
 	float	zoom;
 	float	offset_x;
 	float	offset_y;
+	float	z_scale;
 	float	init_offset_x;
 	float	init_offset_y;
 	float	init_spacing;
+	float	x_r;
+	float	y_r;
+	float	z_r;
 }	t_view;
 
 typedef struct s_img
@@ -94,12 +105,13 @@ typedef struct s_mouse
 
 typedef struct s_meta
 {
-	t_fdf	fdf;
-	t_point	point;
-	t_map	map;
-	t_img	img;
-	t_mouse	mouse;
-	t_view	view;
+	t_fdf		fdf;
+	t_point		point;
+	t_map		map;
+	t_img		img;
+	t_mouse		mouse;
+	t_view		view;
+	t_rotations	rotations;
 }	t_meta;
 
 #endif

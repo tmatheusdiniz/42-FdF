@@ -14,9 +14,7 @@
 #include "../../includes/keys.h"
 
 static void	move_map(t_meta *meta, int dx, int dy);
-static void	zoom_map(t_meta *meta, float factor);
 static void	reset_view(t_meta *meta);
-static void	render_map(t_meta *meta);
 
 int	handle_key_press(int keycode, t_meta *meta)
 {
@@ -30,10 +28,12 @@ int	handle_key_press(int keycode, t_meta *meta)
 		move_map(meta, -10, 0);
 	else if (keycode == KEY_D)
 		move_map(meta, 10, 0);
-	else if (keycode == KEY_I)
-		zoom_map(meta, 1.1);
-	else if (keycode == KEY_O)
-		zoom_map(meta, 0.9);
+	else if (keycode == KEY_I || keycode == KEY_O)
+		z_scale(meta, keycode);
+	else if (keycode == K_ARROW_UP || keycode == K_ARROW_DOWN
+		|| keycode == K_ARROW_LEFT || keycode == K_ARROW_RIGHT
+		|| keycode == KEY_Q || keycode == KEY_E)
+		all_rot(meta, keycode);
 	else if (keycode == KEY_R)
 		reset_view(meta);
 	render_map(meta);
@@ -46,7 +46,7 @@ static void	move_map(t_meta *meta, int dx, int dy)
 	meta->view.offset_y += dy;
 }
 
-static void	zoom_map(t_meta *meta, float factor)
+void	zoom_map(t_meta *meta, float factor)
 {
 	meta->view.zoom *= factor;
 	if (meta->view.zoom < 0.1)
@@ -58,12 +58,13 @@ static void	zoom_map(t_meta *meta, float factor)
 static void	reset_view(t_meta *meta)
 {
 	meta->view.zoom = 1.0;
+	meta->view.z_scale = 1.0;
 	meta->view.offset_x = meta->view.init_offset_x;
 	meta->view.offset_y = meta->view.init_offset_y;
 	meta->map.spacing = meta->view.init_spacing;
 }
 
-static void	render_map(t_meta *meta)
+void	render_map(t_meta *meta)
 {
 	ft_memset(meta->img.addr, 0, WINDOW_WIDTH * WINDOW_HEIGHT
 		* (meta->img.bits_per_pixel / 8));

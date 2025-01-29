@@ -14,7 +14,7 @@
 # define ERROR_H
 
 // Error messages
-# define ERR_ARGS		"🚫 Use exactly 2 arguments! e.g: ./bin/fdf */name_file.fdf"
+# define ERR_ARGS		"🚫 Use just 2 arguments! e.g: ./bin/fdf */name_file.fdf"
 # define ERR_MAP		"🗺️  Invalid ending for map name. Use : name_file.fdf"
 # define ERR_MLC		"💾 Memory allocation failed."
 # define ERR_MLX		"🚫 MLX initialization failed!"

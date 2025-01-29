@@ -47,7 +47,14 @@ static void	init_view(t_meta *meta)
 {
 	if (meta->map.width <= 0 || meta->map.height <= 0)
 		handler_errors(meta, "Invalid map dimensions");
+	meta->view.x_r = 0;
+	meta->view.y_r = 0;
+	meta->view.z_r = 0;
 	meta->view.zoom = 1.0;
+	meta->view.z_scale = 1.0;
+	meta->mouse.is_pressed = FALSE;
+	meta->mouse.last_x = 0;
+	meta->mouse.last_y = 0;
 	calculate_offset(meta);
 	meta->view.init_offset_x = meta->map.offset_x;
 	meta->view.init_offset_y = meta->map.offset_y;
@@ -64,7 +71,7 @@ int	main(int c, char **str)
 	ft_memset(&meta, 0, sizeof(t_meta));
 	read_map(&meta, str[1]);
 	if (!(initialize_mlx(&meta)))
-		handler_errors(&meta, ERR_MLX);	
+		handler_errors(&meta, ERR_MLX);
 	draw_map(&meta);
 	mlx_put_image_to_window(meta.fdf.mlx, meta.fdf.win, meta.img.img_ptr, 0, 0);
 	setup_hooks(&meta);

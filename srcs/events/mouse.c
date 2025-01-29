@@ -10,45 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/keys.h"
+#include "../../includes/fdf.h"
 
-int handle_mouse_press(int button, int x, int y, t_meta *meta)
+int	h_mouse_press(int button, int x, int y, t_meta *meta)
 {
-    if (button == MOUSE_LEFT)
-    {
+	if (button == MOUSE_LEFT)
+	{
 		meta->mouse.is_pressed = TRUE;
 		meta->mouse.last_x = x;
 		meta->mouse.last_y = y;
 	}
-	else if (button == MOUSE_SCROLL_UP)
+	else if (button == M_SCROLL_UP)
 		zoom_map(meta, 1.1);
-	else if (button == MOUSE_SCROLL_DOWN)
+	else if (button == M_SCROLL_DOWN)
 		zoom_map(meta, 0.9);
 	render_map(meta);
 	return (0);
 }
 
-int handle_mouse_release(int button, int x, int y, t_meta *meta)
+int	h_mouse_release(int button, int x, int y, t_meta *meta)
 {
 	(void)x;
 	(void)y;
 	if (button == MOUSE_LEFT)
-		meta->mouse.is_pressed = false;
+		meta->mouse.is_pressed = FALSE;
 	return (0);
 }
 
-int handle_mouse_move(int x, int y, t_meta *meta)
+int	h_mouse_move(int x, int y, t_meta *meta)
 {
 	float	dx;
 	float	dy;
 
-    if (meta->mouse.is_pressed)
-    {
+	if (meta->mouse.is_pressed)
+	{
 		dx = x - meta->mouse.last_x;
 		dy = y - meta->mouse.last_y;
-		rotate_map(meta, dx * 0.01, dy * 0.01);
 		meta->mouse.last_x = x;
 		meta->mouse.last_y = y;
+		meta->view.offset_x += dx;
+		meta->view.offset_y += dy;
 		render_map(meta);
 	}
 	return (0);
