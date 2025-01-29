@@ -12,7 +12,7 @@
 
 #include "../../includes/fdf.h"
 
-void static	init_view(t_meta *meta);
+static void	init_view(t_meta *meta);
 
 static int	initialize_mlx(t_meta *meta)
 {
@@ -43,7 +43,7 @@ static int	initialize_mlx(t_meta *meta)
 	return (1);
 }
 
-void static	init_view(t_meta *meta)
+static void	init_view(t_meta *meta)
 {
 	if (meta->map.width <= 0 || meta->map.height <= 0)
 		handler_errors(meta, "Invalid map dimensions");

@@ -12,12 +12,11 @@
 
 #include "../../includes/fdf.h"
 
-void setup_hooks(t_meta *meta)
+void	setup_hooks(t_meta *meta)
 {
-	mlx_hook(meta->fdf.win, 2, 1L<<0, handle_key_press, meta);
+	mlx_hook(meta->fdf.win, 2, 1L << 0, handle_key_press, meta);
 	//mlx_mouse_hook(meta->fdf.win, handle_mouse_press, meta);
 	mlx_hook(meta->fdf.win, 17, 0, clean_all, meta);
 	//mlx_hook(meta->fdf.win, 5, 1L<<3, handle_mouse_release, meta);
 	//mlx_hook(meta->fdf.win, 6, 1L<6, handle_mouse_move, meta);
 }
-

@@ -29,7 +29,6 @@ static void	free_map_data(t_meta *meta)
 		}
 		free(meta->map.coords);
 	}
-
 }
 
 static void	free_mlx_data(t_meta *meta)
