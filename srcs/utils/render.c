@@ -76,22 +76,10 @@ int	get_color(int z)
 	}
 }
 
-void	draw_m_background(t_meta *meta)
+int	min(int a, int b)
 {
-	int	x;
-	int	y;
-	int	color;
-
-	y = 0;
-	color = 0x929191;
-	while (y < 1080)
-	{
-		x = 0;
-		while (x < 300)
-		{
-			mlx_pixel_put(meta->fdf.mlx, meta->fdf.win, x, y, color);
-			x++;
-		}
-		y++;
-	}
+	if (a < b)
+		return (a);
+	else
+		return (b);
 }

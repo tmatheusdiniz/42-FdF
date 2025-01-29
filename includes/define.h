@@ -17,8 +17,6 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-# define min(a, b) ((a) < (b) ? (a) : (b))
-
 // Defines
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080

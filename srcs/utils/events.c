@@ -20,9 +20,9 @@ void	z_scale(t_meta *meta, int keycode)
 	if (keycode == KEY_O)
 	{
 		if (meta->view.z_scale < 0.0)
-			meta->view.z_scale += 2 * scale;
-		else if (meta->view.z_scale >= 0 && meta->view.z_scale < 1)
-			meta->view.z_scale *= 2.0;
+			meta->view.z_scale += 2.5 * scale;
+		else if (meta->view.z_scale > -1 && meta->view.z_scale < 1)
+			meta->view.z_scale += 2.0;
 		else
 			meta->view.z_scale *= 1.1;
 	}
