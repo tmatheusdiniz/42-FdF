@@ -34,6 +34,8 @@ int	handle_key_press(int keycode, t_meta *meta)
 		|| keycode == K_ARROW_LEFT || keycode == K_ARROW_RIGHT
 		|| keycode == KEY_Q || keycode == KEY_E)
 		all_rot(meta, keycode);
+	else if (keycode == KEY_X || keycode == KEY_Y || keycode == KEY_Z)
+		define_axis(meta, keycode);
 	else if (keycode == KEY_R)
 		reset_view(meta);
 	render_map(meta);
@@ -59,16 +61,10 @@ static void	reset_view(t_meta *meta)
 {
 	meta->view.zoom = 1.0;
 	meta->view.z_scale = 1.0;
+	meta->view.x_r = 0;
+	meta->view.y_r = 0;
+	meta->view.z_r = 0;
 	meta->view.offset_x = meta->view.init_offset_x;
 	meta->view.offset_y = meta->view.init_offset_y;
 	meta->map.spacing = meta->view.init_spacing;
-}
-
-void	render_map(t_meta *meta)
-{
-	ft_memset(meta->img.addr, 0, WINDOW_WIDTH * WINDOW_HEIGHT
-		* (meta->img.bits_per_pixel / 8));
-	draw_map(meta);
-	mlx_put_image_to_window(meta->fdf.mlx, meta->fdf.win,
-		meta->img.img_ptr, 0, 0);
 }

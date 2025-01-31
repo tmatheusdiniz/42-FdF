@@ -28,6 +28,7 @@ void	draw_line_loop(t_meta *meta, int sx, int sy, int err);
 void	draw_map(t_meta *meta);
 void	put_pixel(t_meta *meta, float x, float y);
 void	calculate_offset(t_meta *meta);
+void	render_map(t_meta *meta);
 
 // Map
 void	read_map(t_meta *meta, char *path);
@@ -44,6 +45,22 @@ void	rotation_x(t_meta *meta, float degree);
 void	rotation_y(t_meta *meta, float degree);
 void	rotation_z(t_meta *meta, float degree);
 
+// Background
+void	draw_menu(t_meta *meta);
+void	draw_menu_background(t_meta *meta);
+
+// Animation
+int		start_animation(t_meta *meta);
+void	init_animation(t_meta *meta);
+void	choose_rotation(t_meta *meta, int flag);
+void	define_axis(t_meta *meta, int keycode);
+
+// Menu
+void	start_menu(t_meta *meta);
+void	render_menu(t_meta *meta);
+void	move_box(t_meta *meta);
+void	put_pixel_menu(t_meta *meta, float x, float y);
+
 // Events
 void	setup_hooks(t_meta *meta);
 
@@ -55,17 +72,17 @@ int		h_mouse_move(int x, int y, t_meta *meta);
 // Events keycodes
 int		handle_key_press(int keycode, t_meta *meta);
 void	zoom_map(t_meta *meta, float factor);
-void	render_map(t_meta *meta);
 
 // Utils
 void	aux_draw_map(t_meta *meta, int *i, int *j);
 void	handler_errors(t_meta *meta, char *message);
-void	check_map(int v, char **matrix);
-int		clean_all(t_meta *meta);
+void	check_map(int v, char *path);
+void	print_string(t_meta *meta, int x, int y, char *str);
 void	z_scale(t_meta *meta, int keycode);
 void	all_rot(t_meta *meta, int keycode);
-int		get_color(int z);
 void	draw_m_background(t_meta *meta);
+int		clean_all(t_meta *meta);
+int		get_color(int z);
 int		min(int a, int b);
 
 #endif

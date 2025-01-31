@@ -35,6 +35,8 @@ static void	free_mlx_data(t_meta *meta)
 {
 	if (meta->img.img_ptr)
 		mlx_destroy_image(meta->fdf.mlx, meta->img.img_ptr);
+	if (meta->menu.img_ptr)
+		mlx_destroy_image(meta->fdf.mlx, meta->menu.img_ptr);
 	if (meta->fdf.win)
 		mlx_destroy_window(meta->fdf.mlx, meta->fdf.win);
 	if (meta->fdf.mlx)

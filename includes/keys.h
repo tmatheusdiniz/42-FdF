@@ -24,6 +24,9 @@
 # define KEY_R			114
 # define KEY_Q			113
 # define KEY_E			101
+# define KEY_X			120
+# define KEY_Y			121
+# define KEY_Z			122
 # define KEY_PLUS		61
 # define KEY_MINUS		45
 # define K_ARROW_LEFT	65361
@@ -33,8 +36,8 @@
 
 // Mouse
 # define MOUSE_LEFT		1
-# define MOUSE_RIGHT	2
-# define MOUSE_MIDDLE	3
+# define MOUSE_RIGHT	3
+# define MOUSE_MIDDLE	2
 # define M_SCROLL_UP	4
 # define M_SCROLL_DOWN	5
 

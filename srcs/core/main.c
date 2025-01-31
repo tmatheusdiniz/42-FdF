@@ -47,6 +47,8 @@ static void	init_view(t_meta *meta)
 {
 	if (meta->map.width <= 0 || meta->map.height <= 0)
 		handler_errors(meta, "Invalid map dimensions");
+	init_animation(meta);
+	start_menu(meta);
 	meta->view.x_r = 0;
 	meta->view.y_r = 0;
 	meta->view.z_r = 0;
@@ -67,13 +69,12 @@ int	main(int c, char **str)
 {
 	t_meta	meta;
 
-	check_map(c, str);
+	check_map(c, str[1]);
 	ft_memset(&meta, 0, sizeof(t_meta));
 	read_map(&meta, str[1]);
 	if (!(initialize_mlx(&meta)))
 		handler_errors(&meta, ERR_MLX);
-	draw_map(&meta);
-	mlx_put_image_to_window(meta.fdf.mlx, meta.fdf.win, meta.img.img_ptr, 0, 0);
+	render_map(&meta);
 	setup_hooks(&meta);
 	mlx_loop(meta.fdf.mlx);
 }

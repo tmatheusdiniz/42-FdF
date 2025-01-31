@@ -19,4 +19,5 @@ void	setup_hooks(t_meta *meta)
 	mlx_hook(meta->fdf.win, 4, 1L << 2, h_mouse_press, meta);
 	mlx_hook(meta->fdf.win, 5, 1L << 3, h_mouse_release, meta);
 	mlx_hook(meta->fdf.win, 6, 1L << 6, h_mouse_move, meta);
+	mlx_loop_hook(meta->fdf.mlx, start_animation, meta);
 }

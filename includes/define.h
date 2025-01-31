@@ -18,18 +18,37 @@
 # include <fcntl.h>
 
 // Defines
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
-# define SCALE 20
-# define TRUE 1
-# define FALSE 0
-# define ISO_ANGLE 0.523599
-# define Z_SCALE 0.07
+# define WINDOW_WIDTH	1920
+# define WINDOW_HEIGHT	1080
+# define SCALE			20
+# define TRUE			1
+# define FALSE			0
+# define ISO_ANGLE		0.523599
+# define Z_SCALE		0.07
 
 // Colors
-# define PURPLE 0x800080
-# define YELLOW 0xFFFF00
-# define WHITE 0xFFFFFF
+# define PURPLE	0x800080
+# define YELLOW	0xFFFF00
+# define WHITE	0xFFFFFF
+
+// Menu
+# define MENU_WIDTH		350
+# define MENU_HEIGHT	1080
+# define M_STR_COLOR	0xFFFF00
+# define CONTROL_BOX	180
+# define MOVES_BOX		350
+# define MENU_X			30
+# define SPACE_B_LINES	30
+# define ROTATION_MSG	"left-a / right-a (Y-Axis), up-a / down-a (X-Axis)"
+# define ROTATION_Z_MSG	"Q / E (Z-Axis)"
+# define TRANSLATE_MSG	"A (Left) / D (Right), W (Up) / S (Down)"
+# define ANIMATION_MSG	"Right Click + X / Y / Z to rotate on axis"
+# define MOUSE_MSG		"Move: Hold Left Click & Drag to translate"
+
+// Background
+# define M_BG_C		0x1E1E1E // Menu Background color
+# define M_B_COLOR	0x2D2D2D
+# define B_W		2 // Border width
 
 // Structs
 typedef struct s_fdf
@@ -38,12 +57,14 @@ typedef struct s_fdf
 	void	*win;
 }	t_fdf;
 
-typedef struct s_rotations
+typedef struct s_img
 {
-	float	x;
-	float	y;
-	float	z;
-}	t_rotations;
+	void	*img_ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_point
 {
@@ -86,20 +107,52 @@ typedef struct s_view
 	float	z_r;
 }	t_view;
 
-typedef struct s_img
+typedef struct s_rotations
 {
-	void	*img_ptr;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
+	float	x;
+	float	y;
+	float	z;
+}	t_rotations;
+
 typedef struct s_mouse
 {
 	int		is_pressed;
 	int		last_x;
 	int		last_y;
 }	t_mouse;
+
+typedef struct s_animation
+{
+	int		animation_on;
+	int		rotation_x;
+	int		rotation_y;
+	int		rotation_z;
+	float	speed;
+}	t_animation;
+
+typedef struct s_menu
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bits_p_pixel;
+	int		l_length;
+	int		endian;
+	int		color;
+}	t_menu;
+
+typedef struct s_bg
+{
+	unsigned char	r;
+	unsigned char	r1;
+	unsigned char	r2;
+	unsigned char	g;
+	unsigned char	g1;
+	unsigned char	g2;
+	unsigned char	b;
+	unsigned char	b1;
+	unsigned char	b2;
+	unsigned int	*apply;
+}	t_bg;
 
 typedef struct s_meta
 {
@@ -110,6 +163,9 @@ typedef struct s_meta
 	t_mouse		mouse;
 	t_view		view;
 	t_rotations	rotations;
+	t_animation	animation;
+	t_menu		menu;
+	t_bg		bg;
 }	t_meta;
 
 #endif

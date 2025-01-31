@@ -20,6 +20,18 @@ int	h_mouse_press(int button, int x, int y, t_meta *meta)
 		meta->mouse.last_x = x;
 		meta->mouse.last_y = y;
 	}
+	else if (button == MOUSE_RIGHT)
+	{
+		if (meta->animation.animation_on)
+			meta->animation.animation_on = FALSE;
+		else
+		{
+			meta->animation.rotation_x = FALSE;
+			meta->animation.rotation_y = FALSE;
+			meta->animation.rotation_z = FALSE;
+			meta->animation.animation_on = TRUE;
+		}
+	}
 	else if (button == M_SCROLL_UP)
 		zoom_map(meta, 1.1);
 	else if (button == M_SCROLL_DOWN)
