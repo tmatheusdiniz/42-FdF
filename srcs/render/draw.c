@@ -102,7 +102,7 @@ void	draw_map(t_meta *meta)
 			meta->point.y = i;
 			meta->point.z = meta->map.coords[i][j];
 			project_isometric(meta, &meta->map.screen_x, &meta->map.screen_y);
-			meta->point.color = get_color(meta->point.z);
+			meta->point.color = color_aux(meta, &i, &j);
 			aux_draw_map(meta, &i, &j);
 			j ++;
 		}

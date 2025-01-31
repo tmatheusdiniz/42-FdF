@@ -16,3 +16,11 @@ void	print_string(t_meta *meta, int x, int y, char *str)
 {
 	mlx_string_put(meta->fdf.mlx, meta->fdf.win, x, y, M_STR_COLOR, str);
 }
+
+int	min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}

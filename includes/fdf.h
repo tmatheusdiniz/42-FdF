@@ -82,7 +82,8 @@ void	z_scale(t_meta *meta, int keycode);
 void	all_rot(t_meta *meta, int keycode);
 void	draw_m_background(t_meta *meta);
 int		clean_all(t_meta *meta);
-int		get_color(int z);
+int		get_color(t_meta *meta, int z, int min_z, int max_z);
+int		color_aux(t_meta *meta, int *i, int *j);
 int		min(int a, int b);
 
 #endif

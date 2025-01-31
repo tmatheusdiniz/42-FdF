@@ -72,6 +72,19 @@ static int	is_number(const char *str)
 		return (0);
 	if (*str == '+' || *str == '-')
 		str++;
+	if (*str == '0' && (*(str + 1) == 'x' || *(str + 1) == 'X'))
+	{
+		str += 2;
+		if (!str)
+			return (0);
+		while (*str)
+		{
+			if ((*str <= '0' && *str >= '9') && (*str <= 'a' && *str >= 'f')
+				&& (*str <= 'A' && *str >= 'F'))
+				return (0);
+			str ++;
+		}
+	}
 	while (*str)
 	{
 		if (*str < '0' || *str > '9')

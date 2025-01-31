@@ -58,28 +58,44 @@ static void	put_points_y(t_meta *meta, int *i, int *j)
 	meta->point.z = meta->map.coords[*i + 1][*j];
 }
 
-int	get_color(int z)
+int	get_color(t_meta *meta, int z, int min_z, int max_z)
 {
-	int	color;
+	double	norm_z;
 
 	if (z == 0)
 		return (WHITE);
-	else if (z > 0)
+	if (min_z != max_z)
+		norm_z = (double)(z - min_z) / (max_z - min_z);
+	else
+		norm_z = 0.5;
+	if (z > 0)
 	{
-		color = fmin(255, abs(z) * 20);
-		return ((color << 16) | (0 << 8) | color);
+		meta->point.r = (int)(norm_z * 255);
+		meta->point.g = (int)((1 - norm_z) * 128);
+		meta->point.b = (int)((1 - norm_z) * 255);
 	}
 	else
 	{
-		color = fmin(255, abs(z) * 20);
-		return ((color << 16) | (color << 8) | 0);
+		meta->point.r = (int)((1 - norm_z) * 128);
+		meta->point.g = (int)(norm_z * 255);
+		meta->point.b = (int)(norm_z * 255);
 	}
+	meta->point.r = fmin(fmax(meta->point.r, 0), 255);
+	meta->point.g = fmin(fmax(meta->point.g, 0), 255);
+	meta->point.b = fmin(fmax(meta->point.b, 0), 255);
+	return ((meta->point.r << 16) | (meta->point.g << 8) | meta->point.b);
 }
 
-int	min(int a, int b)
+int	color_aux(t_meta *meta, int *i, int *j)
 {
-	if (a < b)
-		return (a);
-	else
-		return (b);
+	int	z;
+	int	min_z;
+	int	max_z;
+
+	min_z = 2147483647;
+	max_z = -2147483648;
+	z = meta->map.coords[*i][*j];
+	min_z = fmin(min_z, z);
+	max_z = fmax(max_z, z);
+	return (get_color(meta, z, min_z, max_z));
 }

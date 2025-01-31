@@ -77,6 +77,9 @@ typedef struct s_point
 	int	dx;
 	int	dy;
 	int	color;
+	int	r;
+	int	g;
+	int	b;
 }	t_point;
 
 typedef struct s_map
