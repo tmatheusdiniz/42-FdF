@@ -74,22 +74,16 @@ static int	is_number(const char *str)
 		str++;
 	if (*str == '0' && (*(str + 1) == 'x' || *(str + 1) == 'X'))
 	{
-		str += 2;
-		if (!str)
+		if (!check_hex(str))
 			return (0);
-		while (*str)
-		{
-			if ((*str <= '0' && *str >= '9') && (*str <= 'a' && *str >= 'f')
-				&& (*str <= 'A' && *str >= 'F'))
-				return (0);
-			str ++;
-		}
 	}
-	while (*str)
+	if (!check_is_number(str))
+		return (0);
+	if (*str == ',')
 	{
-		if (*str < '0' || *str > '9')
+		str ++;
+		if (!check_hex(str) && !check_after_comma(str))
 			return (0);
-		str++;
 	}
 	return (1);
 }

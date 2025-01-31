@@ -85,5 +85,8 @@ int		clean_all(t_meta *meta);
 int		get_color(t_meta *meta, int z, int min_z, int max_z);
 int		color_aux(t_meta *meta, int *i, int *j);
 int		min(int a, int b);
+int		check_hex(const char *str);
+int		check_after_comma(const char *str);
+int		check_is_number(const char *str);
 
 #endif
