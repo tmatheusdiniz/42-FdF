@@ -47,9 +47,6 @@ int	check_hex(const char *str)
 
 int	check_after_comma(const char *str)
 {
-	int	i;
-
-	i = 0;
 	while (*str)
 	{
 		if (*str < '0' || *str > '9')
@@ -60,9 +57,6 @@ int	check_after_comma(const char *str)
 
 int	check_is_number(const char *str)
 {
-	int	i;
-
-	i = 0;
 	while (*str && *str != ',')
 	{
 		if (*str < '0' || *str > '9')

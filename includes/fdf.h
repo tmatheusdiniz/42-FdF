@@ -37,7 +37,14 @@ void	init_map(t_meta *meta);
 int		map_columns(t_meta *meta, char *line);
 
 // Projections
+
+// Isomtric
 void	project_isometric(t_meta *meta, int *screen_x, int *screen_y);
+
+// Conic
+void	handle_conic(t_meta *meta);
+void	project_conic(t_meta *meta, int *screen_x, int *screen_y);
+void	init_conic(t_meta *meta);
 
 // Rotations
 void	rotation(t_meta *meta, float *x, float *y, float *z);
@@ -88,5 +95,7 @@ int		min(int a, int b);
 int		check_hex(const char *str);
 int		check_after_comma(const char *str);
 int		check_is_number(const char *str);
+void	reset_conic(t_meta *meta);
+void	reset_view(t_meta *meta);
 
 #endif

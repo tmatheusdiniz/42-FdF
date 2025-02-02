@@ -157,6 +157,15 @@ typedef struct s_bg
 	unsigned int	*apply;
 }	t_bg;
 
+typedef struct s_conic
+{
+	float	fov;
+	float	near;
+	float	far;
+	float	distance;
+	int		projection_on;
+}	t_conic;
+
 typedef struct s_meta
 {
 	t_fdf		fdf;
@@ -169,6 +178,7 @@ typedef struct s_meta
 	t_animation	animation;
 	t_menu		menu;
 	t_bg		bg;
+	t_conic		conic;
 }	t_meta;
 
 #endif

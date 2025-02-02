@@ -32,7 +32,7 @@ void	render_menu(t_meta *meta)
 	y += SPACE_B_LINES;
 	print_string(meta, MENU_X + 10, y, "For change perspective: Press c");
 	y += SPACE_B_LINES;
-	print_string(meta, MENU_X + 10, y, "For come back: Press f");
+	print_string(meta, MENU_X + 10, y, "For come back: Press c again");
 	move_box(meta);
 }
 

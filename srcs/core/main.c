@@ -47,6 +47,7 @@ static void	init_view(t_meta *meta)
 {
 	if (meta->map.width <= 0 || meta->map.height <= 0)
 		handler_errors(meta, "Invalid map dimensions");
+	init_conic(meta);
 	init_animation(meta);
 	start_menu(meta);
 	meta->view.x_r = 0;

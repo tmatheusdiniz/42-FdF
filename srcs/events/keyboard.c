@@ -14,7 +14,6 @@
 #include "../../includes/keys.h"
 
 static void	move_map(t_meta *meta, int dx, int dy);
-static void	reset_view(t_meta *meta);
 
 int	handle_key_press(int keycode, t_meta *meta)
 {
@@ -36,7 +35,10 @@ int	handle_key_press(int keycode, t_meta *meta)
 		all_rot(meta, keycode);
 	else if (keycode == KEY_X || keycode == KEY_Y || keycode == KEY_Z)
 		define_axis(meta, keycode);
-	else if (keycode == KEY_R)
+	else if (keycode == KEY_C)
+		handle_conic(meta);
+	else if (keycode == KEY_R && !meta->animation.rotation_x
+		&& !meta->animation.rotation_y && !meta->animation.rotation_z)
 		reset_view(meta);
 	render_map(meta);
 	return (0);
@@ -50,15 +52,33 @@ static void	move_map(t_meta *meta, int dx, int dy)
 
 void	zoom_map(t_meta *meta, float factor)
 {
+	float	prev_zoom;
+	float	zoom_delta;
+
+	prev_zoom = meta->view.zoom;
 	meta->view.zoom *= factor;
 	if (meta->view.zoom < 0.1)
 		meta->view.zoom = 0.1;
 	if (meta->view.zoom > 10)
 		meta->view.zoom = 10;
+	if (meta->conic.projection_on)
+	{
+		//reset_conic(meta);
+		zoom_delta = meta->view.zoom / prev_zoom;
+		meta->view.offset_x = (meta->view.offset_x - WINDOW_WIDTH / 2.0)
+			* zoom_delta + WINDOW_WIDTH / 2.0;
+		meta->view.offset_y = (meta->view.offset_y - WINDOW_HEIGHT / 2.0)
+			* zoom_delta + WINDOW_HEIGHT / 2.0;
+	}
 }
 
-static void	reset_view(t_meta *meta)
+void	reset_view(t_meta *meta)
 {
+	if (meta->conic.projection_on)
+	{
+		reset_conic(meta);
+		return ;
+	}
 	meta->view.zoom = 1.0;
 	meta->view.z_scale = 1.0;
 	meta->view.x_r = 0;

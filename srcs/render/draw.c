@@ -21,9 +21,9 @@ void	calculate_offset(t_meta *meta)
 			(WINDOW_HEIGHT / 3) / meta->map.height);
 	if (meta->map.spacing < 1)
 		meta->map.spacing = 1;
-	wireframe_x = (meta->map.width - 1) * meta->map.spacing / 3;
+	wireframe_x = (meta->map.width - 1) * meta->map.spacing / 2;
 	wireframe_y = (meta->map.height - 1) * meta->map.spacing * 2;
-	meta->map.offset_x = (WINDOW_WIDTH - wireframe_x) / 2.0;
+	meta->map.offset_x = (WINDOW_WIDTH - wireframe_x) / 1.8;
 	meta->map.offset_y = (WINDOW_HEIGHT - wireframe_y) / 2.0;
 }
 

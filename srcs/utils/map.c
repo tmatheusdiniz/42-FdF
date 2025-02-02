@@ -47,7 +47,7 @@ int	aux_check(int fd)
 	return (1);
 }
 
-void static	map_guard(int fd)
+static void	map_guard(int fd)
 {
 	int	i;
 
