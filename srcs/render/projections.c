@@ -61,10 +61,10 @@ void	project_conic(t_meta *meta, int *screen_x, int *screen_y)
 	float	z_perspec;
 	float	z_offset;
 
-	x = meta->point.x * meta->map.spacing * meta->view.zoom;
-	y = meta->point.y * meta->map.spacing * meta->view.zoom;
+	x = meta->point.x * meta->map.spacing;
+	y = meta->point.y * meta->map.spacing;
 	z = meta->point.z * (meta->map.spacing * Z_SCALE)
-		* meta->view.zoom * meta->view.z_scale;
+		* meta->view.z_scale;
 	if (meta->view.x_r != 0 || meta->view.y_r != 0 || meta->view.z_r != 0)
 		rotation(meta, &x, &y, &z);
 	meta->conic.distance = 2000.0f;
@@ -74,8 +74,10 @@ void	project_conic(t_meta *meta, int *screen_x, int *screen_y)
 		z_perspec = 1;
 	*screen_x = (int)(x * meta->conic.distance / z_perspec);
 	*screen_y = (int)(y * meta->conic.distance / z_perspec);
-	*screen_x += WINDOW_WIDTH / 2.5;
-	*screen_y += WINDOW_HEIGHT / 4;
+	*screen_x = (int)(*screen_x - WINDOW_WIDTH / 6.1) // 2.5
+		* meta->view.zoom + WINDOW_WIDTH / 2.0;
+	*screen_y = (int)(*screen_y - WINDOW_HEIGHT / 3) // 4.0
+		* meta->view.zoom + WINDOW_HEIGHT / 2.0;
 	*screen_x += meta->view.offset_x;
 	*screen_y += meta->view.offset_y;
 }

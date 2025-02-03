@@ -80,8 +80,9 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	char	**matrix;
 
-	i = count_words(s, c);
-	matrix = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!s)
+		return (NULL);
+	matrix = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
 	if (!matrix)
 		return (NULL);
 	i = 0;

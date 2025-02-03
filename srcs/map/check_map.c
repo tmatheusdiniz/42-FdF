@@ -37,11 +37,7 @@ int	aux_check(int fd)
 		if (count == 0)
 			return (0);
 		if (count != temp)
-		{
-			free (line);
 			return (0);
-		}
-		free (line);
 		line = get_next_line(fd);
 	}
 	return (1);
@@ -91,10 +87,12 @@ static int	is_number(const char *str)
 static int	check_line(char *line)
 {
 	int		i;
+	char	*trimed;
 	char	**split;
 
-	line = ft_strtrim(line, "\n ");
-	split = ft_split(line, ' ');
+	trimed = ft_strtrim(line, "\n ");
+	free (line);
+	split = ft_split(trimed, ' ');
 	if (!split)
 		return (0);
 	i = 0;
@@ -105,11 +103,12 @@ static int	check_line(char *line)
 			while (split[i])
 				free(split[i++]);
 			free(split);
-			return (0);
+			return (free(trimed), 0);
 		}
 		free (split[i]);
 		i ++;
 	}
+	free (trimed);
 	free (split);
 	return (i);
 }

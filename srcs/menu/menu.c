@@ -12,6 +12,11 @@
 
 #include "../../includes/fdf.h"
 
+static void	print_string(t_meta *meta, int x, int y, char *str)
+{
+	mlx_string_put(meta->fdf.mlx, meta->fdf.win, x, y, M_STR_COLOR, str);
+}
+
 void	start_menu(t_meta *meta)
 {
 	meta->menu.img_ptr = mlx_new_image(meta->fdf.mlx, MENU_WIDTH, MENU_HEIGHT);
