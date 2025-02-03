@@ -74,17 +74,17 @@ void	project_conic(t_meta *meta, int *screen_x, int *screen_y)
 		z_perspec = 1;
 	*screen_x = (int)(x * meta->conic.distance / z_perspec);
 	*screen_y = (int)(y * meta->conic.distance / z_perspec);
-	*screen_x = (int)(*screen_x - WINDOW_WIDTH / 6.1) // 2.5
-		* meta->view.zoom + WINDOW_WIDTH / 2.0;
-	*screen_y = (int)(*screen_y - WINDOW_HEIGHT / 3) // 4.0
-		* meta->view.zoom + WINDOW_HEIGHT / 2.0;
+	*screen_x = (int)(*screen_x - WINDOW_WIDTH / 6.1)
+		*meta->view.zoom + WINDOW_WIDTH / 2.0;
+	*screen_y = (int)(*screen_y - WINDOW_HEIGHT / 3)
+		*meta->view.zoom + WINDOW_HEIGHT / 2.0;
 	*screen_x += meta->view.offset_x;
 	*screen_y += meta->view.offset_y;
 }
 
 void	init_conic(t_meta *meta)
 {
-	meta->conic.fov = 60.0;
+	meta->conic.fov = 45.0;
 	meta->conic.near = 0.1;
 	meta->conic.far = 1000.0;
 	meta->conic.projection_on = 0;

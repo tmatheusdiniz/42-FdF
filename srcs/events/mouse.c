@@ -12,6 +12,14 @@
 
 #include "../../includes/fdf.h"
 
+static void	aux_mouse(t_meta *meta)
+{
+	meta->animation.animation_on = FALSE;
+	meta->animation.rotation_x = FALSE;
+	meta->animation.rotation_y = FALSE;
+	meta->animation.rotation_z = FALSE;
+}
+
 int	h_mouse_press(int button, int x, int y, t_meta *meta)
 {
 	if (button == MOUSE_LEFT)
@@ -23,7 +31,7 @@ int	h_mouse_press(int button, int x, int y, t_meta *meta)
 	else if (button == MOUSE_RIGHT)
 	{
 		if (meta->animation.animation_on)
-			meta->animation.animation_on = FALSE;
+			aux_mouse(meta);
 		else
 		{
 			meta->animation.rotation_x = FALSE;

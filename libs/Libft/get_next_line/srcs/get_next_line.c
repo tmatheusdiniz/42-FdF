@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
+#include <stdio.h>
 
 char	*get_read(int fd, char *str)
 {
@@ -30,6 +31,8 @@ char	*get_read(int fd, char *str)
 			free(str);
 			return (NULL);
 		}
+		if (aux == 0)
+			break ;
 		readed[aux] = 0;
 		str = get_strjoin(str, readed);
 	}

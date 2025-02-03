@@ -16,15 +16,15 @@ void	z_scale(t_meta *meta, int keycode)
 {
 	float	scale;
 
-	scale = 0.1;
+	scale = 0.2;
 	if (keycode == KEY_O)
 	{
 		if (meta->view.z_scale < 0.0)
-			meta->view.z_scale += 2.5 * scale;
+			meta->view.z_scale += 2.0 * scale;
 		else if (meta->view.z_scale > -1 && meta->view.z_scale < 1)
-			meta->view.z_scale += 2.0;
+			meta->view.z_scale += 1.8;
 		else
-			meta->view.z_scale *= 1.1;
+			meta->view.z_scale += 2 * scale;
 	}
 	else if (keycode == KEY_I)
 	{

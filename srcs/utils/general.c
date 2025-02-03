@@ -19,3 +19,15 @@ int	min(int a, int b)
 	else
 		return (b);
 }
+
+void	clear_gnl(int fd)
+{
+	char	*temp;
+
+	temp = get_next_line(fd);
+	while (temp != NULL)
+	{
+		free(temp);
+		temp = get_next_line(fd);
+	}
+}

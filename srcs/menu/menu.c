@@ -30,6 +30,8 @@ void	render_menu(t_meta *meta)
 {
 	int	y;
 
+	y = 100;
+	print_string(meta, MENU_X - 20, y, "-- by Matheus Diniz --");
 	y = CONTROL_BOX;
 	print_string(meta, MENU_X, y, " /// CONTROLS ///");
 	y += SPACE_B_LINES;
@@ -38,13 +40,6 @@ void	render_menu(t_meta *meta)
 	print_string(meta, MENU_X + 10, y, "For change perspective: Press c");
 	y += SPACE_B_LINES;
 	print_string(meta, MENU_X + 10, y, "For come back: Press c again");
-	move_box(meta);
-}
-
-void	move_box(t_meta *meta)
-{
-	int	y;
-
 	y = MOVES_BOX;
 	print_string(meta, MENU_X, y, " /// MOVEMENT CONTROLS ///");
 	y += SPACE_B_LINES;
@@ -52,7 +47,14 @@ void	move_box(t_meta *meta)
 	y += SPACE_B_LINES - 10;
 	print_string(meta, MENU_X + 20, y, TRANSLATE_MSG);
 	y += SPACE_B_LINES - 10;
-	print_string(meta, MENU_X + 20, y, "Z-Axis: I (Up) / O (Down)");
+	print_string(meta, MENU_X + 20, y, "A (left) / D (right)");
+	y += SPACE_B_LINES -10;
+	print_string(meta, MENU_X + 20, y, "Z-Axis: O (Up) / I (Down)");
+	move_box(meta, y);
+}
+
+void	move_box(t_meta *meta, int y)
+{
 	y += SPACE_B_LINES - 10;
 	print_string(meta, MENU_X + 20, y, MOUSE_MSG);
 	y += SPACE_B_LINES;
@@ -60,11 +62,15 @@ void	move_box(t_meta *meta)
 	y += SPACE_B_LINES - 10;
 	print_string(meta, MENU_X + 20, y, ROTATION_MSG);
 	y += SPACE_B_LINES - 10;
+	print_string(meta, MENU_X + 20, y, "left-arrow / right-arrow (Y-axis)");
+	y += SPACE_B_LINES - 10;
 	print_string(meta, MENU_X + 20, y, ROTATION_Z_MSG);
 	y += SPACE_B_LINES;
 	print_string(meta, MENU_X + 10, y, "Animation:");
 	y += SPACE_B_LINES - 10;
-	print_string(meta, MENU_X + 10, y, ANIMATION_MSG);
+	print_string(meta, MENU_X + 20, y, ANIMATION_MSG);
+	y += SPACE_B_LINES;
+	print_string(meta, MENU_X + 20, y, "Right Click again for stop animation");
 	y += SPACE_B_LINES;
 	print_string(meta, MENU_X + 10, y, "Press ESC for exit!!!");
 }

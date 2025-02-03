@@ -34,9 +34,7 @@ int	aux_check(int fd)
 	while (line)
 	{
 		count = check_line(line);
-		if (count == 0)
-			return (0);
-		if (count != temp)
+		if (count == 0 || count != temp)
 			return (0);
 		line = get_next_line(fd);
 	}
@@ -50,11 +48,13 @@ static void	map_guard(int fd)
 	i = aux_check(fd);
 	if (i == 0)
 	{
+		clear_gnl(fd);
 		ft_printf("%s\n", "Invalid Map");
 		exit (1);
 	}
 	else if (i == 3)
 	{
+		clear_gnl(fd);
 		ft_printf("%s\n", ERR_READ);
 		exit(1);
 	}
@@ -93,6 +93,7 @@ static int	check_line(char *line)
 	trimed = ft_strtrim(line, "\n ");
 	free (line);
 	split = ft_split(trimed, ' ');
+	free (trimed);
 	if (!split)
 		return (0);
 	i = 0;
@@ -103,12 +104,11 @@ static int	check_line(char *line)
 			while (split[i])
 				free(split[i++]);
 			free(split);
-			return (free(trimed), 0);
+			return (0);
 		}
 		free (split[i]);
 		i ++;
 	}
-	free (trimed);
 	free (split);
 	return (i);
 }

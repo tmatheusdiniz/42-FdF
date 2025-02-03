@@ -67,7 +67,7 @@ void	define_axis(t_meta *meta, int keycode);
 // Menu
 void	start_menu(t_meta *meta);
 void	render_menu(t_meta *meta);
-void	move_box(t_meta *meta);
+void	move_box(t_meta *meta, int y);
 void	put_pixel_menu(t_meta *meta, float x, float y);
 
 // -- Events --
@@ -110,6 +110,7 @@ int		color_aux(t_meta *meta, int *i, int *j);
 int		min(int a, int b);
 void	reset_conic(t_meta *meta);
 void	reset_view(t_meta *meta);
+void	clear_gnl(int fd);
 
 // -- --!
 

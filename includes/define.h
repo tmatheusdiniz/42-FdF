@@ -34,21 +34,21 @@
 // Menu
 # define MENU_WIDTH		350
 # define MENU_HEIGHT	1080
-# define M_STR_COLOR	0xFFFF00
+# define M_STR_COLOR	0x2ECC71
 # define CONTROL_BOX	180
 # define MOVES_BOX		350
 # define MENU_X			30
 # define SPACE_B_LINES	30
-# define ROTATION_MSG	"left-a / right-a (Y-Axis), up-a / down-a (X-Axis)"
+# define ROTATION_MSG	"up-arrow / down-arrow (X-axis)"
 # define ROTATION_Z_MSG	"Q / E (Z-Axis)"
-# define TRANSLATE_MSG	"A (Left) / D (Right), W (Up) / S (Down)"
+# define TRANSLATE_MSG	"W (Up) / S (Down)"
 # define ANIMATION_MSG	"Right Click + X / Y / Z to rotate on axis"
 # define MOUSE_MSG		"Move: Hold Left Click & Drag to translate"
 
 // Background
-# define M_BG_C		0x1E1E1E // Menu Background color
-# define M_B_COLOR	0x2D2D2D
-# define B_W		2 // Border width
+# define M_BG_C		0x0D1D3B // Menu Background color
+# define M_B_COLOR	0x2C7DB3
+# define B_W		4 // Border width
 
 // Structs
 typedef struct s_fdf
