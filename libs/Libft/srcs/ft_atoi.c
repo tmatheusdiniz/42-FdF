@@ -12,7 +12,7 @@
 
 #include "../include/libft.h"
 
-static int	ft_count_bits(long long number)
+int	ft_count_bits(long long number)
 {
 	int	count;
 

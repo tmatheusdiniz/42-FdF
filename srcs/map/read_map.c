@@ -125,6 +125,6 @@ int	map_columns(t_meta *meta, char *path)
 		free (split[i++]);
 	free (split);
 	free (line);
-	close (fd);
-	return (count);
+	clear_gnl(fd);
+	return (close(fd), count);
 }

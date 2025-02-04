@@ -36,6 +36,9 @@ BIN_DIR	= bin
 LIBFT_DIR	= ./libs/Libft/
 MINILIBX_DIR = ./libs/minilibx-linux/
 
+# MinilibX
+MINILIBX_REPO = https://github.com/42Paris/minilibx-linux.git
+
 SRCS	= $(wildcard $(SRC_DIR)/*/*.c)
 
 OBJS	= $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SRCS:.c=.o))
@@ -69,7 +72,7 @@ ifeq ($(UNAME_S),Darwin)
 endif
 
 # Rules
-all: $(NAME)
+all: clone_mlbx $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS) $(MLX)
 	@mkdir -p $(BIN_DIR)
@@ -88,17 +91,36 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(MLX): $(MINILIBX_DIR)
 	@make -C $^ > /dev/null 2>&1
 
+clone_minilibx:
+	@mkdir -p ./libs
+	@if [ ! -d "$(MINILIBX_DIR)" ]; then \
+		git clone $(MINILIBX_REPO) $(MINILIBX_DIR) > /dev/null 2>&1; \
+		echo "$(GREEN)MinilibX cloned successfully into ./libs/minilibx!$(RESET)"; \
+	else \
+		echo "$(YELLOW)MinilibX directory already exists.$(RESET)"; \
+	fi
+
+clone_mlbx:
+	@if [ ! -d "$(MINILIBX_DIR)" ]; then \
+		$(MAKE) clone_minilibx > /dev/null 2>&1; \
+	fi
+
 $(LIBFT):
 	@make --silent -C $(LIBFT_DIR)
 
 clean:
-	@make --silent -C ./libs/minilibx-linux clean
+	@if [ -d "$(MINILIBX_DIR)" ]; then \
+		make --silent -C $(MINILIBX_DIR) clean; \
+	fi
+	@rm -rf $(MINILIBX_DIR)
 	@clear
 	@make --silent -C $(LIBFT_DIR) clean
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@make --silent -C ./libs/minilibx-linux clean
+	@if [ -d "$(MINILIBX_DIR)" ]; then \
+		make --silent -C $(MINILIBX_DIR) clean; \
+	fi
 	@clear
 	@make --silent -C $(LIBFT_DIR) fclean
 	@rm -rf $(BIN_DIR)
