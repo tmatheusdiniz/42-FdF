@@ -44,7 +44,7 @@ int	check_after_comma(const char *str)
 
 int	check_is_number(const char *str)
 {
-	while (*str && *str != ',')
+	while (*str && *str != ',' && *str != '.')
 	{
 		if (*str < '0' || *str > '9')
 			return (0);
