@@ -20,12 +20,15 @@ CYAN = \033[36m
 WHITE = \033[3;37m
 
 #library name
-NAME = libft.a
+NAME	= libft.a
 
 #Directories
-SRC = $(wildcard srcs/*.c) $(wildcard ft_printf/*/*.c) $(wildcard get_next_line/*/*.c)
-OBJS = ${SRC:.c=.o}
-OBJS_BONUS = ${linked_list:.c=.o}
+SRC		= $(wildcard srcs/*.c) $(wildcard ft_printf/*/*.c) $(wildcard get_next_line/*/*.c)
+OBJS	= ${SRC:.c=.o}
+
+# Bonus
+SRCS_BONUS	= $(wildcard srcs/linked_list/*.c)
+OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
 
 #commands and flags
 COMPILER = cc
@@ -64,10 +67,11 @@ all: ${NAME}
 
 bonus: ${OBJS} ${OBJS_BONUS}
 	@ar rcs ${NAME} $^
+	@touch $@
 	@echo "$(GREEN)Bonus functions successfully compiled!$(RESET)"
 
 clean:
-	@${RM} ${OBJS} ${OBJS_BONUS}
+	@${RM} ${OBJS} ${OBJS_BONUS} bonus
 	@rm -rf ./ft_printf/srcs/*.o
 	@rm -rf ./get_next_line/srcs/*.o
 	@clear
@@ -89,4 +93,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
+.NOT_PHONY: bonus
