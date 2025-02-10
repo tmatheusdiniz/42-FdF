@@ -88,14 +88,19 @@ int	get_color(t_meta *meta, int z, int min_z, int max_z)
 
 int	color_aux(t_meta *meta, int *i, int *j)
 {
-	int	z;
-	int	min_z;
-	int	max_z;
+	int			z;
+	static int	min_z;
+	static int	max_z;
+	static int	initialized;
 
 	min_z = 2147483647;
 	max_z = -2147483648;
+	initialized = 0;
+	if (!initialized)
+	{
+		find_z_bounds(meta, &min_z, &max_z);
+		initialized = 1;
+	}
 	z = meta->map.coords[*i][*j];
-	min_z = fmin(min_z, z);
-	max_z = fmax(max_z, z);
 	return (get_color(meta, z, min_z, max_z));
 }

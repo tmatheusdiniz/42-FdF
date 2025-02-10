@@ -111,6 +111,7 @@ int		min(int a, int b);
 void	reset_conic(t_meta *meta);
 void	reset_view(t_meta *meta);
 void	clear_gnl(int fd);
+void	find_z_bounds(t_meta *meta, int *min_z, int *max_z);
 
 // -- --!
 
