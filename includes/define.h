@@ -92,6 +92,8 @@ typedef struct s_map
 	int		current_x;
 	int		current_y;
 	int		**coords;
+	int		min_z;
+	int		max_z;
 	float	offset_x;
 	float	offset_y;
 }	t_map;

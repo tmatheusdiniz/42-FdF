@@ -32,21 +32,21 @@ void	clear_gnl(int fd)
 	}
 }
 
-void	find_z_bounds(t_meta *meta, int *min_z, int *max_z)
+void	find_z_bounds(t_meta *meta)
 {
 	int	i;
 	int	j;
 
-	*min_z = 2147483647;
-	*max_z = -2147483648;
+	meta->map.min_z = 2147483647;
+	meta->map.max_z = -2147483648;
 	i = 0;
 	while (i < meta->map.height)
 	{
 		j = 0;
 		while (j < meta->map.width)
 		{
-			*min_z = fmin(*min_z, meta->map.coords[i][j]);
-			*max_z = fmax(*max_z, meta->map.coords[i][j]);
+			meta->map.min_z = fmin(meta->map.min_z, meta->map.coords[i][j]);
+			meta->map.max_z = fmax(meta->map.max_z, meta->map.coords[i][j]);
 			j++;
 		}
 		i++;
