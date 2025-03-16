@@ -93,6 +93,8 @@ void	draw_map(t_meta *meta)
 
 	i = 0;
 	calculate_offset(meta);
+	find_z_bounds(meta);
+	meta->point.color = color_aux(meta, &i, &j);
 	while (i < meta->map.height)
 	{
 		j = 0;
