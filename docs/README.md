@@ -29,7 +29,7 @@
 <b>Below you can see some demos of the maps running on my computer</b>
 </div>
 <p align="center">
-<img src="https://github.com/tmatheusdiniz/42-FdF/releases/download/img/amaz_map.png" width="900" hidth="150">
+<img src="https://github.com/tmatheusdiniz/42-FdF/releases/download/img/julia_map.png" width="900" hidth="150">
 </P>
 <p align="center">
 <img src="https://github.com/tmatheusdiniz/42-FdF/releases/download/img/cord_map.png" width="900" hidth="150">
