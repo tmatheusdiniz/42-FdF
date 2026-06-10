@@ -69,9 +69,9 @@ $ ./bin/fdf maps/valid_map.fdf
 |`Mouse Scroll`| Zomm In/Out|
 |`Arrows`| Rotation the map|
 |`Q / E`| Rotation the map in z axis|
-|`MOuse (right clicked)`| Allow run the animation|
+|`Mouse (right clicked)`| Allow run the animation|
 |`X/Y/Z`| After allowing the animation to run, click on x, y or z to run the animation|
-|`MOuse (right cliked)`| Right clicked again to stop the animation|
+|`Mouse (right cliked)`| Right clicked again to stop the animation|
 |`ESC ❌`| Exit of the program|
 
 </div>
